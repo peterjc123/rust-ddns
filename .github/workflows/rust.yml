@@ -24,3 +24,9 @@ jobs:
       run: cargo build --features=default-config --verbose
     - name: Run tests (with config)
       run: cargo clippy --features=default-config --all -- -D warnings
+    - name: Build (release)
+      run: cargo build --release --verbose
+    - uses: actions/upload-artifact@v2
+      with:
+        name: rust-ddns
+        path: target/release/rust-ddns
