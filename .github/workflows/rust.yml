@@ -1,0 +1,26 @@
+name: Rust
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --verbose
+    - name: Run tests
+      run: cargo clippy --all -- -D warning
+    - name: Build (with config)
+      run: cargo build --features=default-config --verbose
+    - name: Run tests (with config)
+      run: cargo clippy --features=default-config --all -- -D warning
