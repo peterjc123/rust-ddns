@@ -3,7 +3,6 @@ use hyper::{header, HeaderMap};
 use hyper::{Body, Method};
 use serde::{Deserialize, Serialize};
 use std::array::IntoIter;
-use std::iter::FromIterator;
 
 #[derive(Serialize)]
 struct RequestData {
@@ -146,13 +145,14 @@ fn update_dns_record_data(host: &str, domain: &str, ip: &str) -> String {
 }
 
 pub fn get_headers(api_key: &str) -> HeaderMap {
-    HeaderMap::from_iter(IntoIter::new([
+    IntoIter::new([
         (
             header::AUTHORIZATION,
             format!("Bearer {}", api_key).parse().unwrap(),
         ),
         (header::CONTENT_TYPE, "application/json".parse().unwrap()),
-    ]))
+    ])
+    .collect()
 }
 
 pub async fn update_dns_record(
