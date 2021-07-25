@@ -12,21 +12,21 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest]
 
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo clippy --all -- -D warnings
-    - name: Build (with config)
-      run: cargo build --features=default-config --verbose
-    - name: Run tests (with config)
-      run: cargo clippy --features=default-config --all -- -D warnings
-    - name: Build (release)
       run: cargo build --release --verbose
+    - name: Run tests
+      run: cargo clippy --release --all -- -D warnings
+    - name: Build (with config)
+      run: cargo build --release --features=default-config --verbose
+    - name: Run tests (with config)
+      run: cargo clippy --release --features=default-config --all -- -D warnings
     - uses: actions/upload-artifact@v2
       with:
         name: rust-ddns
-        path: target/release/rust-ddns
+        path: |
+          target/release/rust-ddns
+          target/release/rust-ddns.exe
