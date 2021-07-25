@@ -28,7 +28,7 @@ jobs:
       run: cargo clippy --release --features=default-config --all -- -D warnings
     - uses: actions/upload-artifact@v2
       with:
-        name: rust-ddns
+        name: rust-ddns-${{ matrix.os }}
         path: |
           target/release/rust-ddns
           target/release/rust-ddns.exe
