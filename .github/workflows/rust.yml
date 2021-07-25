@@ -18,10 +18,10 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: |
-      mkdir -p config
-      echo APIKEY > config/api_key_default.txt
-      echo BACKEND > config/backend_default.txt
-      echo DOMAIN > config/domain_default.txt
+        mkdir -p config
+        echo APIKEY > config/api_key_default.txt
+        echo BACKEND > config/backend_default.txt
+        echo DOMAIN > config/domain_default.txt
 
       cargo build --verbose
     - name: Run tests
