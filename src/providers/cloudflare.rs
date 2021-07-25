@@ -1,7 +1,9 @@
 use crate::utils::{fetch_url_with_json, get_record_id_and_ip, HasSuccessField, RecordParsable};
-use hyper::{header, http::header::HeaderValue, HeaderMap};
+use hyper::{header, HeaderMap};
 use hyper::{Body, Method};
 use serde::{Deserialize, Serialize};
+use std::array::IntoIter;
+use std::iter::FromIterator;
 
 #[derive(Serialize)]
 struct RequestData {
@@ -144,18 +146,13 @@ fn update_dns_record_data(host: &str, domain: &str, ip: &str) -> String {
 }
 
 pub fn get_headers(api_key: &str) -> HeaderMap {
-    let mut headers = HeaderMap::new();
-
-    headers.insert(
-        header::AUTHORIZATION,
-        HeaderValue::from_str(format!("Bearer {}", api_key).as_str()).unwrap(),
-    );
-    headers.insert(
-        header::CONTENT_TYPE,
-        HeaderValue::from_static("application/json"),
-    );
-
-    headers
+    HeaderMap::from_iter(IntoIter::new([
+        (
+            header::AUTHORIZATION,
+            format!("Bearer {}", api_key).parse().unwrap(),
+        ),
+        (header::CONTENT_TYPE, "application/json".parse().unwrap()),
+    ]))
 }
 
 pub async fn update_dns_record(

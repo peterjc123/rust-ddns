@@ -66,7 +66,7 @@ fn dns_update_url(api_key: &str, domain: &str, record_id: &str, host: &str, ip: 
 }
 
 pub fn get_headers() -> HeaderMap {
-    HeaderMap::new()
+    HeaderMap::default()
 }
 
 pub async fn update_dns_record(
