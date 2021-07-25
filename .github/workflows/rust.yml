@@ -22,8 +22,7 @@ jobs:
         echo APIKEY > config/api_key_default.txt
         echo BACKEND > config/backend_default.txt
         echo DOMAIN > config/domain_default.txt
-
-      cargo build --verbose
+        cargo build --verbose
     - name: Run tests
       run: cargo clippy --all -- -D warning
     - name: Build (with config)
