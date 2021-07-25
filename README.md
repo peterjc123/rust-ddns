@@ -88,7 +88,7 @@ This is enabled as a feature in rust. Following are the steps to enable it.
     ```xxx
     APIKEY -> config/api_key_default.txt
     BACKEND -> config/backend_default.txt
-    domain -> config/domain_default.txt
+    DOMAIN -> config/domain_default.txt
     ```
 
 2. Build with the feature enabled
@@ -96,3 +96,8 @@ This is enabled as a feature in rust. Following are the steps to enable it.
     ```bash
     cargo build --release --features=default-config
     ```
+
+## Future work
+1. IPV6 support
+2. Multiple domains
+3. Config file
