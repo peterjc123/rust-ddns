@@ -18,14 +18,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build --release --verbose
-    - name: Run tests
-      run: cargo clippy --release --all -- -D warnings
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
     - name: Build (with config)
       run: cargo build --release --features=default-config --verbose
     - name: Run tests (with config)
       run: cargo clippy --release --features=default-config --all -- -D warnings
+    - name: Build
+      run: cargo build --release --verbose
+    - name: Run tests
+      run: cargo clippy --release --all -- -D warnings
     - uses: actions/upload-artifact@v2
       with:
         name: rust-ddns-${{ matrix.os }}
