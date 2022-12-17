@@ -4,6 +4,7 @@ mod utils;
 use log::LevelFilter;
 use providers::update_dns_record;
 use simple_logger::SimpleLogger;
+use time::UtcOffset;
 use utils::{get_current_ip, get_viewable_api_key, parse_config};
 
 #[tokio::main]
@@ -26,6 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
     SimpleLogger::new()
         .with_level(LevelFilter::Info)
+        .with_utc_offset(UtcOffset::from_hms(8, 0, 0).unwrap())
         .init()
         .unwrap();
 
