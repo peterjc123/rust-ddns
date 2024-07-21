@@ -48,7 +48,6 @@ struct DnsRecord {
     pub proxiable: bool,
     pub proxied: bool,
     pub ttl: u32,
-    pub locked: bool,
     pub meta: DnsRecordMeta,
     pub created_on: String,
     pub modified_on: String,
