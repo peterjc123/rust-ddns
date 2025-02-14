@@ -39,8 +39,8 @@ struct UpdateReply {
 #[derive(Deserialize)]
 struct DnsRecord {
     pub id: String,
-    pub zone_id: String,
-    pub zone_name: String,
+    pub zone_id: Option<String>,
+    pub zone_name: Option<String>,
     pub name: String,
     #[serde(rename = "type", default)]
     pub record_type: String,
@@ -70,9 +70,9 @@ struct ResultInfo {
 
 #[derive(Deserialize)]
 struct DnsRecordMeta {
-    pub auto_added: bool,
-    pub managed_by_apps: bool,
-    pub managed_by_argo_tunnel: bool,
+    pub auto_added: Option<bool>,
+    pub managed_by_apps: Option<bool>,
+    pub managed_by_argo_tunnel: Option<bool>,
     pub source: Option<String>,
 }
 
